@@ -1,0 +1,26 @@
+ul
+  - @entries.group_by{ |e| e.date.year }.each do |year, year_entries|
+    li
+      h2 = year
+      ul
+        - year_entries.group_by{ |e| e.date.month }.each do |month, month_entries|
+          li
+            h3 = '%02d' % month
+            ul
+              - month_entries.each do |e|
+                li
+                  = e.date.strftime '%Y-%m-%d'
+                  '
+                  ' [chat
+                  a href=e.chat_href(:html) html
+                  '
+                  ' |
+                  a href=e.chat_href(:txt) txt
+                  ' ]
+                  '
+                  ' [connections
+                  a href=e.connections_href(:html) html
+                  '
+                  ' |
+                  a href=e.connections_href(:txt) txt
+                  ' ]

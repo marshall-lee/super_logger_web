@@ -1,0 +1,8 @@
+---
+environment: production
+threaded: true
+threadpool_size: 2
+tag: super_logger_web
+daemonize: true
+socket: /tmp/super_logger_web.sock
+chdir: /home/minecraft/super_logger_web
