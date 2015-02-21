@@ -10,7 +10,11 @@ set :server, :thin
 
 configure do
   enable :inline_templates
-  set :log_dir, "/home/marshall/code/logs"
+  if development?
+    set :log_dir, "/home/marshall/code/logs"
+  else
+    set :log_dir, "/home/minecraft/spigot/plugins/SuperLogger/logs"
+  end
 end
 
 
