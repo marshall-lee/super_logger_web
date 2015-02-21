@@ -35,6 +35,10 @@ get %r{/logs/(\d\d\d\d)/(\d\d)/(\d\d)/(chat|connections)(\.(txt|html))?} do |yea
                    date.strftime("%d"),
                    "#{type}.log"
 
+  unless File.exists? path
+    halt 404
+  end
+
   file = File.open(path, "r")
 
   case format
