@@ -46,6 +46,7 @@ get %r{/logs/(\d\d\d\d)/(\d\d)/(\d\d)/(chat|connections)(\.(txt|html))?} do |yea
     content_type :text
     file.read
   when :html
+    content_type :html
     case type
     when :chat
       @title = "Chat #{date.strftime("%Y-%m-%d")}"
