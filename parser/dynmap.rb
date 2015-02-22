@@ -6,7 +6,8 @@ require_relative 'coord'
 
 class Dynmap
   RegExp = %r{\[(../../..) - (..:..:..)\] (.+) \((\w+)\) (.+)$}
-  Coord = OpenStruct.new href: 'http://mc.lemonspace.me/'
+  Coord = OpenStruct.new href: 'http://mc.lemonspace.me/',
+                         map_name: nil
   def Coord.to_s
     'dynmap'
   end
@@ -38,11 +39,14 @@ class Dynmap
       source = data[4].downcase.to_sym
 
       nick = data[3]
-      player = Player.new nick, nil
+      player = Player.new nil, nick, nil
 
       text = data[5]
 
-      yield Entry.new(time, source, player, text)
+      entry = Entry.new(time, source, player, text)
+      player.entry = entry
+
+      yield entry
     end
   end
 end
