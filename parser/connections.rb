@@ -33,7 +33,7 @@ class Connections
       player = Player.new nick, uid
 
       x,y,z = data[6..8].map(&:to_i)
-      world_name = data[9]
+      world_name = data[9].to_sym
       coord = Coord.new world_name, x, y, z
 
       yield Entry.new(time, type, player, coord)

@@ -32,7 +32,7 @@ class Chat
       player = Player.new nick, uid
 
       x,y,z = data[5..7].map(&:to_i)
-      world_name = data[8]
+      world_name = data[8].to_sym
       coord = Coord.new world_name, x, y, z
 
       text = data[9]
