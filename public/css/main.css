@@ -14,9 +14,12 @@ a:hover {
 }
 
 @media (min-width: 700px) { 
-  table.log {
+  table.log, main.index {
     width: 700px;
     margin: 0 auto;
+  }
+
+  table.log {
     table-layout: fixed;
   }
 
@@ -27,6 +30,24 @@ a:hover {
   body {
     padding: 40px 0 100px 0;
   }
+}
+
+main.index h2 {
+  font-size: 32px;
+  border-bottom: 1px solid #999;
+  padding: 0 0 10px 0;
+  margin: 0;
+}
+
+main.index h3 {
+  font-size: 17px;
+  margin: 8px 0;
+}
+
+main.index ul {
+  list-style-type: square;
+  padding-left: 20px;
+  margin: 0;
 }
 
 table.log td:first-child {

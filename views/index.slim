@@ -1,36 +1,35 @@
-ul
+main.index
   - @entries.group_by{ |e| e.date.year }.each do |year, year_entries|
-    li
+    section
       h2 = year
-      ul
-        - year_entries.group_by{ |e| e.date.month }.each do |month, month_entries|
-          li
-            h3 = month_entries.first.date.strftime('%B')
-            ul
-              - month_entries.each do |e|
-                li
-                  a href=e.all_href = e.date.strftime '%Y-%m-%d'
-                  '
-                  ' [ chat
-                  a href=e.chat_href(:html) html
-                  '
-                  ' |
-                  a href=e.chat_href(:txt) txt
-                  '
-                  ' ]
-                  '
-                  ' [ connections
-                  a href=e.connections_href(:html) html
-                  '
-                  ' |
-                  a href=e.connections_href(:txt) txt
-                  '
-                  ' ]
-                  '
-                  ' [ dynmap
-                  a href=e.dynmap_href(:html) html
-                  '
-                  ' |
-                  a href=e.dynmap_href(:txt) txt
-                  '
-                  ' ]
+      - year_entries.group_by{ |e| e.date.month }.each do |month, month_entries|
+        section
+          h3 = month_entries.first.date.strftime('%B')
+          ul
+            - month_entries.each do |e|
+              li
+                a.day href=e.all_href = e.date.strftime '%d'
+                '
+                ' [ chat
+                a href=e.chat_href(:html) html
+                '
+                ' |
+                a href=e.chat_href(:txt) txt
+                '
+                ' ]
+                '
+                ' [ connections
+                a href=e.connections_href(:html) html
+                '
+                ' |
+                a href=e.connections_href(:txt) txt
+                '
+                ' ]
+                '
+                ' [ dynmap
+                a href=e.dynmap_href(:html) html
+                '
+                ' |
+                a href=e.dynmap_href(:txt) txt
+                '
+                ' ]
