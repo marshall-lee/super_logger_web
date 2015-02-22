@@ -14,6 +14,10 @@ class IndexEntry < Struct.new(:date)
     "#{base_uri}/connections.#{format}"
   end
 
+  def all_href
+    "#{base_uri}/all.html"
+  end
+
   def self.from_dir(dirname)
     root = Pathname.new dirname
     root.children.flat_map do |year_path|
