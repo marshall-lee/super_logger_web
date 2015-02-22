@@ -1,7 +1,8 @@
 body {
   background: #fff;
   font-family: Helvetica, sans-serif;
-  padding: 40px 0;
+  font-size: 14px;
+  line-height: 25px;
 }
 
 a:link {
@@ -24,8 +25,7 @@ a:hover {
   }
 
   body {
-    font-size: 14px;
-    line-height: 25px;
+    padding: 40px 0;
   }
 }
 
