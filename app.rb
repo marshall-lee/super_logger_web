@@ -11,7 +11,7 @@ set :server, :thin
 configure do
   enable :inline_templates
   if development?
-    set :log_dir, "/home/marshall/code/logs"
+    set :log_dir, File.join(File.dirname(__FILE__), 'sample_logs')
   else
     set :log_dir, "/home/minecraft/spigot/plugins/SuperLogger/logs"
   end
