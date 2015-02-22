@@ -24,14 +24,14 @@ get '/logs' do
   slim :index
 end
 
-get %r{/logs/(\d\d\d\d)/(\d\d)/(\d\d)/(chat|connections)(\.(txt|html))?} do |year, month, day, type, _, format|
+get %r{^/logs/(\d\d\d\d)/(\d\d)/(\d\d)/(chat|connections)\.(txt|html)$} do |year, month, day, type, format|
   date = begin
            Date.parse "#{year}-#{month}-#{day}"
          rescue ArgumentError
            halt 400
          end
 
-  format = (format || :txt).to_sym
+  format = format.to_sym
   type = type.to_sym
 
   path = File.join settings.log_dir,
