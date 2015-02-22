@@ -52,8 +52,8 @@ main.index ul {
   list-style-type: square;
   padding-left: 1em;
   margin: 0;
-  font-size: 28px;
-  line-height: 35px;
+  font-size: 22px;
+  line-height: 32px;
   margin-bottom: 31px;
 }
 
@@ -100,4 +100,14 @@ table.log .user {
 table.log .entry.connection {
   font-size: 11px;
   color: #ccc;
+}
+
+table.log .entry.dynmap .source {
+  color: #fff;
+  font-style: italic;
+  background: #ccc;
+  padding: 4px;
+  margin-right: 6px;
+  font-size: 12px;
+  border-radius: 10px;
 }
