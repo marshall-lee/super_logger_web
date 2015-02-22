@@ -1,0 +1,7 @@
+table
+  - @parser.each do |entry|
+    tr
+      td
+        == partial :base_entry, locals: { entry: entry }
+      td
+        == partial :dynmap_entry, locals: { entry: entry }

@@ -8,3 +8,5 @@ table
           == partial :chat_entry, locals: { entry: entry }
         - elsif entry.is_a? Connections::Entry
           == partial :connections_entry, locals: { entry: entry }
+        - elsif entry.is_a? Dynmap::Entry
+          == partial :dynmap_entry, locals: { entry: entry }

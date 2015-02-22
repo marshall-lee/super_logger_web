@@ -7,6 +7,7 @@ require 'pathname'
 require_relative 'parser/index_entry'
 require_relative 'parser/chat'
 require_relative 'parser/connections'
+require_relative 'parser/dynmap'
 
 set :server, :thin
 
@@ -38,7 +39,7 @@ before %r{^/logs/(\d\d\d\d)/(\d\d)/(\d\d)/} do |year, month, day|
                        @date.strftime("%d")
 end
 
-get %r{^/logs/\d\d\d\d/\d\d/\d\d/(chat|connections)\.(txt|html)$} do |type, format|
+get %r{^/logs/\d\d\d\d/\d\d/\d\d/(chat|connections|dynmap)\.(txt|html)$} do |type, format|
   format = format.to_sym
   type = type.to_sym
 
@@ -63,6 +64,9 @@ get %r{^/logs/\d\d\d\d/\d\d/\d\d/(chat|connections)\.(txt|html)$} do |type, form
     when :connections
       @title = "Connections #{@date_str}"
       @parser = Connections.new(file)
+    when :dynmap
+      @title = "Dynmap #{@date_str}"
+      @parser = Dynmap.new(file)
     end
     slim type
   else
@@ -71,7 +75,7 @@ get %r{^/logs/\d\d\d\d/\d\d/\d\d/(chat|connections)\.(txt|html)$} do |type, form
 end
 
 get %r{^/logs/\d\d\d\d/\d\d/\d\d/all.html$} do
-  @data = [:chat, :connections].flat_map do |type|
+  @data = [:chat, :connections, :dynmap].flat_map do |type|
     path = File.join @log_dir, "#{type}.log"
     parser_class = Kernel.const_get type.to_s.split('_').collect(&:capitalize).join
     if File.exists? path
