@@ -1,10 +1,16 @@
-- @parser.each do |entry|
-  span
-    = entry.time_s
-    ' 
-  a style='color: #{entry.player.color}' href=entry.coord.href
-    = entry.player
-  span
-    '
-    = entry.text
-  br
+table
+  - @parser.each do |entry|
+    tr
+      td
+        = entry.time_s
+        ' 
+        a style='color: grey' href=entry.coord.href
+          = entry.coord
+
+      td
+        a style='color: #{entry.player.color}' href=entry.player.href
+          = entry.player
+        span
+          '
+          = entry.text
+        br
