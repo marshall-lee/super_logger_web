@@ -29,7 +29,7 @@ class Chat
 
       nick = data[3]
       uid = data[4]
-      player = Player.new nick, uid
+      player = Player.new nil, nick, uid
 
       x,y,z = data[5..7].map(&:to_i)
       world_name = data[8].to_sym
@@ -37,7 +37,10 @@ class Chat
 
       text = data[9]
 
-      yield Entry.new(time, player, coord, text)
+      entry = Entry.new time, player, coord, text
+      player.entry = entry
+
+      yield entry
     end
   end
 
