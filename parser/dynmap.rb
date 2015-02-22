@@ -14,7 +14,7 @@ class Dynmap
 
   class Entry < Struct.new(:time, :source, :player, :text)
     def time_s
-      time.strftime '[%Y-%m-%d %H:%M:%S]'
+      time.strftime '%H:%M'
     end
 
     def coord

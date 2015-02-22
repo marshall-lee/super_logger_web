@@ -12,9 +12,14 @@ a:hover {
 }
 
 @media (min-width: 700px) { 
-  table.chat {
+  table.log {
     width: 700px;
     margin: 0 auto;
+    table-layout: fixed;
+  }
+
+  table.log td:first-child {
+    width: 35px;
   }
 
   body {
@@ -23,21 +28,21 @@ a:hover {
   }
 }
 
-.chat td:first-child {
+table.log td:first-child {
   vertical-align: baseline;
   white-space: nowrap;
   padding-right: 4px;
 }
 
-.chat time {
+table.log time {
   color: #888;
   font-size: 60%;
 }
 
-.chat .location img {
+table.log .location img {
   margin-bottom: -4px;
 }
 
-.chat .user {
+table.log .user {
   font-style: italic;
 }

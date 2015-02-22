@@ -8,7 +8,7 @@ class Connections
 
   class Entry < Struct.new(:time, :type, :player, :coord)
     def time_s
-      time.strftime '[%Y-%m-%d %H:%M:%S]'
+      time.strftime '%H:%M'
     end
   end
 
