@@ -1,4 +1,5 @@
-= entry.time_s
-' 
-a style='color: grey' href=entry.coord.href
-  = entry.coord
+time datetime=entry.time title=entry.time
+  = entry.time_s
+'
+a.location href=entry.coord.href
+  img src="/pin.svg" width="12" height="12" alt="Location" title=entry.coord

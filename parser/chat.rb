@@ -8,7 +8,7 @@ class Chat
 
   class Entry < Struct.new(:time, :player, :coord, :text)
     def time_s
-      time.strftime '[%Y-%m-%d %H:%M:%S]'
+      time.strftime '%H:%M'
     end
   end
 

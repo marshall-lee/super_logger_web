@@ -1,0 +1,43 @@
+body {
+  background: #fff;
+  font-family: Helvetica, sans-serif;
+}
+
+a:link {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+@media (min-width: 700px) { 
+  table.chat {
+    width: 700px;
+    margin: 0 auto;
+  }
+
+  body {
+    font-size: 14px;
+    line-height: 25px;
+  }
+}
+
+.chat td:first-child {
+  vertical-align: baseline;
+  white-space: nowrap;
+  padding-right: 4px;
+}
+
+.chat time {
+  color: #888;
+  font-size: 60%;
+}
+
+.chat .location img {
+  margin-bottom: -4px;
+}
+
+.chat .user {
+  font-style: italic;
+}
