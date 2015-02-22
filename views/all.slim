@@ -1,0 +1,10 @@
+table
+  - @data.each do |entry|
+    tr
+      td
+        == partial :base_entry, locals: { entry: entry }
+      td
+        - if entry.is_a? Chat::Entry
+          == partial :chat_entry, locals: { entry: entry }
+        - elsif entry.is_a? Connections::Entry
+          == partial :connections_entry, locals: { entry: entry }

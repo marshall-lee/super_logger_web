@@ -69,3 +69,18 @@ get %r{^/logs/\d\d\d\d/\d\d/\d\d/(chat|connections)\.(txt|html)$} do |type, form
     halt 400
   end
 end
+
+get %r{^/logs/\d\d\d\d/\d\d/\d\d/all.html$} do
+  @data = [:chat, :connections].flat_map do |type|
+    path = File.join @log_dir, "#{type}.log"
+    parser_class = Kernel.const_get type.to_s.split('_').collect(&:capitalize).join
+    if File.exists? path
+      parser_class.new(File.open(path)).to_a
+    else
+      []
+    end
+  end
+  @data.sort_by!(&:time)
+
+  slim :all
+end
