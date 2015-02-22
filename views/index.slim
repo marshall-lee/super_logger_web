@@ -9,12 +9,8 @@ ul
             ul
               - month_entries.each do |e|
                 li
-                  = e.date.strftime '%Y-%m-%d'
+                  a href=e.all_href = e.date.strftime '%Y-%m-%d'
                   '
-                  ' [
-                  a href=e.all_href all
-                  '
-                  ' ]
                   ' [ chat
                   a href=e.chat_href(:html) html
                   '
