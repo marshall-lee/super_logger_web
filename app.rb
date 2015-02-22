@@ -59,13 +59,13 @@ get %r{^/logs/\d\d\d\d/\d\d/\d\d/(chat|connections|dynmap)\.(txt|html)$} do |typ
     content_type :html
     case type
     when :chat
-      @title = "Chat #{@date_str}"
+      @title = "Chat log / #{@date_str}"
       @parser = Chat.new(file)
     when :connections
-      @title = "Connections #{@date_str}"
+      @title = "Connections log / #{@date_str}"
       @parser = Connections.new(file)
     when :dynmap
-      @title = "Dynmap #{@date_str}"
+      @title = "Dynmap log / #{@date_str}"
       @parser = Dynmap.new(file)
     end
     slim type
