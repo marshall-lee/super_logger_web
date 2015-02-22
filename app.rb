@@ -24,21 +24,24 @@ get '/logs' do
   slim :index
 end
 
-get %r{^/logs/(\d\d\d\d)/(\d\d)/(\d\d)/(chat|connections)\.(txt|html)$} do |year, month, day, type, format|
-  date = begin
-           Date.parse "#{year}-#{month}-#{day}"
-         rescue ArgumentError
-           halt 400
-         end
+before %r{^/logs/(\d\d\d\d)/(\d\d)/(\d\d)/} do |year, month, day|
+  @date = begin
+            Date.parse "#{year}-#{month}-#{day}"
+          rescue ArgumentError
+            halt 400
+          end
+  @date_str = @date.strftime("%Y-%m-%d")
+  @log_dir = File.join settings.log_dir,
+                       @date.strftime("%Y"),
+                       @date.strftime("%m"),
+                       @date.strftime("%d")
+end
 
+get %r{^/logs/\d\d\d\d/\d\d/\d\d/(chat|connections)\.(txt|html)$} do |type, format|
   format = format.to_sym
   type = type.to_sym
 
-  path = File.join settings.log_dir,
-                   date.strftime("%Y"),
-                   date.strftime("%m"),
-                   date.strftime("%d"),
-                   "#{type}.log"
+  path = File.join @log_dir, "#{type}.log"
 
   unless File.exists? path
     halt 404
@@ -54,10 +57,10 @@ get %r{^/logs/(\d\d\d\d)/(\d\d)/(\d\d)/(chat|connections)\.(txt|html)$} do |year
     content_type :html
     case type
     when :chat
-      @title = "Chat #{date.strftime("%Y-%m-%d")}"
+      @title = "Chat #{@date_str}"
       @parser = Chat.new(file)
     when :connections
-      @title = "Connections #{date.strftime("%Y-%m-%d")}"
+      @title = "Connections #{@date_str}"
       @parser = Connections.new(file)
     end
     slim type
