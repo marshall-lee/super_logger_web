@@ -3,7 +3,7 @@ require 'time'
 require_relative 'player'
 require_relative 'coord'
 
-class ChatParser
+class Chat
   RegExp = %r{\[(../../..) - (..:..:..)\] (.+) \(([a-f0-9-]+)\) at \((-?\d+), (-?\d+), (-?\d+)\) in world '(\w+)' : (.+)$}
 
   class Entry < Struct.new(:time, :player, :coord, :text)

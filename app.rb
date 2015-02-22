@@ -4,7 +4,7 @@ require 'date'
 require 'pathname'
 
 require_relative 'parser/index_entry'
-require_relative 'parser/chat_parser'
+require_relative 'parser/chat'
 
 set :server, :thin
 
@@ -54,7 +54,7 @@ get %r{/logs/(\d\d\d\d)/(\d\d)/(\d\d)/(chat|connections)(\.(txt|html))?} do |yea
     case type
     when :chat
       @title = "Chat #{date.strftime("%Y-%m-%d")}"
-      @parser = ChatParser.new(file)
+      @parser = Chat.new(file)
     when :connections
       # TODO: implement
     end
