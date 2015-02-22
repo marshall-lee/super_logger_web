@@ -1,0 +1,9 @@
+a style='color: #{entry.player.color}' href=entry.player.href
+  = entry.player
+span
+  '
+  - if entry.type == :join
+    | joined the game!
+  - elsif entry.type == :quit
+    | left the game!
+br

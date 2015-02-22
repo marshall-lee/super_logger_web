@@ -2,18 +2,6 @@ table
   - @parser.each do |entry|
     tr
       td
-        = entry.time_s
-        ' 
-        a style='color: grey' href=entry.coord.href
-          = entry.coord
-
+        == partial :base_entry, locals: { entry: entry }
       td
-        a style='color: #{entry.player.color}' href=entry.player.href
-          = entry.player
-        span
-          '
-          - if entry.type == :join
-            | joined the game!
-          - elsif entry.type == :quit
-            | left the game!
-        br
+        == partial :connections_entry, locals: { entry: entry }

@@ -1,4 +1,5 @@
 require 'sinatra'
+require 'sinatra/partial'
 require 'slim'
 require 'date'
 require 'pathname'
@@ -10,7 +11,7 @@ require_relative 'parser/connections'
 set :server, :thin
 
 configure do
-  enable :inline_templates
+  set :partial_template_engine, :slim
   if development?
     set :log_dir, File.join(File.dirname(__FILE__), 'sample_logs')
   else
