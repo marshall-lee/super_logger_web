@@ -32,6 +32,10 @@ a:hover {
   }
 }
 
+main.index a {
+  color: #000;
+}
+
 main.index h2 {
   font-size: 32px;
   border-bottom: 1px solid #999;
@@ -41,13 +45,37 @@ main.index h2 {
 
 main.index h3 {
   font-size: 17px;
-  margin: 8px 0;
+  margin: 5px 0 14px 0;
 }
 
 main.index ul {
   list-style-type: square;
-  padding-left: 20px;
+  padding-left: 1em;
   margin: 0;
+  font-size: 28px;
+  line-height: 35px;
+  margin-bottom: 31px;
+}
+
+main.index .partial, main.index .descr {
+  font-size: 15px;
+  color: #bbb;
+}
+
+main.index .partial > span {
+  padding: 0 0px 0 20px;
+}
+
+main.index .partial > span > a, main.index .descr {
+  color: #000;
+}
+
+main.index .partial > span > a:first-child {
+  margin: 0 5px 0 9px;
+}
+
+main.index .descr {
+  margin-left: 10px;
 }
 
 table.log td:first-child {

@@ -9,27 +9,23 @@ main.index
             - month_entries.each do |e|
               li
                 a.day href=e.all_href = e.date.strftime '%d'
-                '
-                ' [ chat
-                a href=e.chat_href(:html) html
-                '
-                ' |
-                a href=e.chat_href(:txt) txt
-                '
-                ' ]
-                '
-                ' [ connections
-                a href=e.connections_href(:html) html
-                '
-                ' |
-                a href=e.connections_href(:txt) txt
-                '
-                ' ]
-                '
-                ' [ dynmap
-                a href=e.dynmap_href(:html) html
-                '
-                ' |
-                a href=e.dynmap_href(:txt) txt
-                '
-                ' ]
+                a.descr href=e.all_href = "html"
+                span.partial
+                  span.chat
+                    ' chat:
+                    a href=e.chat_href(:html) html
+                    ' ◆
+                    a href=e.chat_href(:txt) txt
+                    ' ;
+                  span.connections
+                    ' connections:
+                    a href=e.connections_href(:html) html
+                    ' ◆
+                    a href=e.connections_href(:txt) txt
+                    ' ;
+                  span.dynmap
+                    ' dynmap:
+                    a href=e.dynmap_href(:html) html
+                    ' ◆
+                    a href=e.dynmap_href(:txt) txt
+                    ' .
