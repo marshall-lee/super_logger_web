@@ -5,7 +5,7 @@ ul
       ul
         - year_entries.group_by{ |e| e.date.month }.each do |month, month_entries|
           li
-            h3 = '%02d' % month
+            h3 = month_entries.first.date.strftime('%B')
             ul
               - month_entries.each do |e|
                 li
