@@ -3,10 +3,12 @@ table.log.all
     tr
       td
         == partial :base_entry, locals: { entry: entry }
-      td
         - if entry.is_a? Chat::Entry
-          == partial :chat_entry, locals: { entry: entry }
+          td.entry.chat
+            == partial :chat_entry, locals: { entry: entry }
         - elsif entry.is_a? Connections::Entry
-          == partial :connections_entry, locals: { entry: entry }
+          td.entry.connection
+            == partial :connections_entry, locals: { entry: entry }
         - elsif entry.is_a? Dynmap::Entry
-          == partial :dynmap_entry, locals: { entry: entry }
+          td.entry.dynmap
+            == partial :dynmap_entry, locals: { entry: entry }

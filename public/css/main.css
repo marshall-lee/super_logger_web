@@ -96,3 +96,8 @@ table.log .location img {
 table.log .user {
   font-style: italic;
 }
+
+table.log .entry.connection {
+  font-size: 11px;
+  color: #ccc;
+}
