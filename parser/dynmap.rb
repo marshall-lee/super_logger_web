@@ -2,7 +2,6 @@ require 'time'
 require 'ostruct'
 
 require_relative 'player'
-require_relative 'coord'
 
 class Dynmap
   RegExp = %r{\[(../../..) - (..:..:..)\] (.+) \((\w+)\) (.+)$}
