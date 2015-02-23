@@ -133,3 +133,12 @@ table.log .entry.dynmap .source {
   font-size: 12px;
   border-radius: 10px;
 }
+
+.nick.color0 {color: #b58900;}
+.nick.color1 {color: #cb4b16;}
+.nick.color2 {color: #dc322f;}
+.nick.color3 {color: #d33682;}
+.nick.color4 {color: #6c71c4;}
+.nick.color5 {color: #268bd2;}
+.nick.color6 {color: #2aa198;}
+.nick.color7 {color: #859900;}
