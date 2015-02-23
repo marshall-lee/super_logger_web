@@ -67,6 +67,8 @@ main.index .partial a, main.index .descr {
 }
 
 main.index .partial > span {
+  white-space: nowrap;
+  display: inline-block;
   padding: 0 0px 0 20px;
 }
 
@@ -80,6 +82,12 @@ main.index .partial > span > a:first-child {
 
 main.index .descr {
   margin-left: 10px;
+}
+
+@media (max-width: 560px) {
+  main.index .descr {display: none;}
+  main.index .partial > span {padding: 0 0px 0 10px;}
+  main.index ul {padding-left: 8px;}
 }
 
 table.log td:first-child {
