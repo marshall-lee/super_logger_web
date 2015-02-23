@@ -114,6 +114,16 @@ table.log .entry.connection {
   color: #ccc;
 }
 
+table.log .entry.death {
+  font-size: 11px;
+  color: #aaa;
+}
+
+table.log .entry.death .reason {
+  font-size: 11px;
+  color: #cc0000;
+}
+
 table.log .entry.dynmap .source {
   color: #fff;
   font-style: italic;

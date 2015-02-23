@@ -18,6 +18,10 @@ class IndexEntry < Struct.new(:date)
     "#{base_uri}/dynmap.#{format}"
   end
 
+  def deaths_href(format=:html)
+    "#{base_uri}/deaths.#{format}"
+  end
+
   def all_href
     "#{base_uri}/all.html"
   end
