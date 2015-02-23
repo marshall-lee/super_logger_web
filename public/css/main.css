@@ -130,8 +130,8 @@ table.log .entry.dynmap .source {
   background: #eee8d5;
   padding: 4px;
   margin-right: 6px;
-  font-size: 12px;
-  border-radius: 10px;
+  font-size: 9px;
+  border-radius: 8px;
 }
 
 .nick.color0 {color: #b58900;}
