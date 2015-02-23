@@ -82,5 +82,7 @@ get %r{^/logs/\d\d\d\d/\d\d/\d\d/all.html$} do
   end
   @data.sort_by!(&:time)
 
+  @title = "Log / #{@date_str}"
+
   slim :all
 end
