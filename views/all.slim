@@ -12,3 +12,6 @@ table.log.all
         - elsif entry.is_a? Dynmap::Entry
           td.entry.dynmap
             == partial :dynmap_entry, locals: { entry: entry }
+        - elsif entry.is_a? Deaths::Entry
+          td.entry.death
+            == partial :deaths_entry, locals: { entry: entry }
