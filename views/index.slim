@@ -1,14 +1,16 @@
 main.index
   - @entries.group_by{ |e| e.date.year }.each do |year, year_entries|
-    section
+    section id=year
       h2 = year
       - year_entries.group_by{ |e| e.date.month }.each do |month, month_entries|
-        section
+        section id=month_entries.first.date.strftime('%Y-%m')
           h3 = month_entries.first.date.strftime('%B')
           ul
             - month_entries.each do |e|
               li
-                a.day href=e.all_href = e.date.strftime '%d'
+                a.day [href=e.all_href
+                       id=month_entries.first.date.strftime('%Y-%m-%d')]
+                  = e.date.strftime '%d'
                 a.descr href=e.all_href = "html"
                 span.partial
                   span.chat
