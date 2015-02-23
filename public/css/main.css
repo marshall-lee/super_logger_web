@@ -1,5 +1,6 @@
 body {
-  background: #fff;
+  background: #fdf6e3;
+  color: #657b83;
   font-family: Helvetica, sans-serif;
   font-size: 14px;
   line-height: 25px;
@@ -13,7 +14,7 @@ a:hover {
   text-decoration: underline;
 }
 
-@media (min-width: 700px) { 
+@media (min-width: 700px) {
   table.log, main.index {
     width: 700px;
     margin: 0 auto;
@@ -33,12 +34,12 @@ a:hover {
 }
 
 main.index a {
-  color: #000;
+  color: #586e75;
 }
 
 main.index h2 {
   font-size: 19px;
-  border-bottom: 1px solid #bbb;
+  border-bottom: 1px solid #93a1a1;
   margin: 0;
 }
 
@@ -59,7 +60,7 @@ main.index ul {
 
 main.index .partial, main.index .descr {
   font-size: 14px;
-  color: #bbb;
+  color: #93a1a1;
 }
 
 main.index .partial a, main.index .descr {
@@ -73,7 +74,7 @@ main.index .partial > span {
 }
 
 main.index .partial > span > a, main.index .descr {
-  color: #000;
+  color: #586e75;
 }
 
 main.index .partial > span > a:first-child {
@@ -97,7 +98,7 @@ table.log td:first-child {
 }
 
 table.log time {
-  color: #888;
+  color: #93a1a1;
   font-size: 60%;
 }
 
@@ -111,23 +112,22 @@ table.log .user {
 
 table.log .entry.connection {
   font-size: 11px;
-  color: #ccc;
+  color: #93a1a1;
 }
 
 table.log .entry.death {
   font-size: 11px;
-  color: #aaa;
+  color: #93a1a1;
 }
 
 table.log .entry.death .reason {
-  font-size: 11px;
-  color: #cc0000;
+  font-style: italic;
 }
 
 table.log .entry.dynmap .source {
-  color: #fff;
+  color: #839496;
   font-style: italic;
-  background: #ccc;
+  background: #eee8d5;
   padding: 4px;
   margin-right: 6px;
   font-size: 12px;
