@@ -115,9 +115,18 @@ table.log .entry.connection {
   color: #93a1a1;
 }
 
+table.log .entry.connection .arrow {
+  font-size: 15px;
+  color: #93a1a1;
+}
+
 table.log .entry.death {
   font-size: 11px;
   color: #93a1a1;
+}
+
+table.log .entry.death .skull {
+  font-size: 18px;
 }
 
 table.log .entry.death .reason {

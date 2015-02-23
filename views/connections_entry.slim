@@ -1,7 +1,8 @@
-- if entry.type == :join
-  | ⟶
-- elsif entry.type == :quit
-  | ⟵
+span.arrow
+  - if entry.type == :join
+    | ⟶
+  - elsif entry.type == :quit
+    | ⟵
 '
 a.user class=entry.player.color_cls href=entry.player.href
   = entry.player.nick
