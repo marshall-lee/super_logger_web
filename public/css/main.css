@@ -1,5 +1,6 @@
 body {
-  background: #fff;
+  background: #fdf6e3;
+  color: #657b83;
   font-family: Helvetica, sans-serif;
   font-size: 14px;
   line-height: 25px;
@@ -13,7 +14,7 @@ a:hover {
   text-decoration: underline;
 }
 
-@media (min-width: 700px) { 
+@media (min-width: 700px) {
   table.log, main.index {
     width: 700px;
     margin: 0 auto;
@@ -33,23 +34,23 @@ a:hover {
 }
 
 main.index a {
-  color: #000;
+  color: #586e75;
 }
 
 main.index h2 {
-  font-size: 32px;
-  border-bottom: 1px solid #999;
-  padding: 0 0 10px 0;
+  font-size: 19px;
+  border-bottom: 1px solid #93a1a1;
   margin: 0;
 }
 
 main.index h3 {
-  font-size: 17px;
+  font-style: italic;
+  font-size: 15px;
   margin: 5px 0 14px 0;
 }
 
 main.index ul {
-  list-style-type: square;
+  list-style-type: none;
   padding-left: 1em;
   margin: 0;
   font-size: 22px;
@@ -58,16 +59,22 @@ main.index ul {
 }
 
 main.index .partial, main.index .descr {
-  font-size: 15px;
-  color: #bbb;
+  font-size: 14px;
+  color: #93a1a1;
+}
+
+main.index .partial a, main.index .descr {
+  font-style: italic;
 }
 
 main.index .partial > span {
+  white-space: nowrap;
+  display: inline-block;
   padding: 0 0px 0 20px;
 }
 
 main.index .partial > span > a, main.index .descr {
-  color: #000;
+  color: #586e75;
 }
 
 main.index .partial > span > a:first-child {
@@ -78,6 +85,12 @@ main.index .descr {
   margin-left: 10px;
 }
 
+@media (max-width: 560px) {
+  main.index .descr {display: none;}
+  main.index .partial > span {padding: 0 0px 0 10px;}
+  main.index ul {padding-left: 8px;}
+}
+
 table.log td:first-child {
   vertical-align: baseline;
   white-space: nowrap;
@@ -85,7 +98,7 @@ table.log td:first-child {
 }
 
 table.log time {
-  color: #888;
+  color: #93a1a1;
   font-size: 60%;
 }
 
@@ -99,25 +112,33 @@ table.log .user {
 
 table.log .entry.connection {
   font-size: 11px;
-  color: #ccc;
+  color: #93a1a1;
 }
 
 table.log .entry.death {
   font-size: 11px;
-  color: #aaa;
+  color: #93a1a1;
 }
 
 table.log .entry.death .reason {
-  font-size: 11px;
-  color: #cc0000;
+  font-style: italic;
 }
 
 table.log .entry.dynmap .source {
-  color: #fff;
+  color: #839496;
   font-style: italic;
-  background: #ccc;
+  background: #eee8d5;
   padding: 4px;
   margin-right: 6px;
-  font-size: 12px;
-  border-radius: 10px;
+  font-size: 9px;
+  border-radius: 8px;
 }
+
+.nick.color0 {color: #b58900;}
+.nick.color1 {color: #cb4b16;}
+.nick.color2 {color: #dc322f;}
+.nick.color3 {color: #d33682;}
+.nick.color4 {color: #6c71c4;}
+.nick.color5 {color: #268bd2;}
+.nick.color6 {color: #2aa198;}
+.nick.color7 {color: #859900;}

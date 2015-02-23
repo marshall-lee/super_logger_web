@@ -12,6 +12,6 @@ class Coord < Struct.new(:world_name, :x, :y, :z)
   end
 
   def to_s
-    "(#{x},#{y},#{z})"
+    "#{map_name} (#{x}, #{y}, #{z})"
   end
 end
