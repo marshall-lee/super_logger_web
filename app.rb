@@ -20,6 +20,12 @@ configure do
   end
 end
 
+helpers do
+  def parser_class(category)
+    Kernel.const_get(category.to_s.split('_').collect(&:capitalize).join)
+  end
+end
+
 
 get '/logs' do
   @entries = IndexEntry.from_dir(settings.log_dir).reverse!
@@ -39,11 +45,11 @@ before %r{^/logs/(\d\d\d\d)/(\d\d)/(\d\d)/} do |year, month, day|
                        @date.strftime("%d")
 end
 
-get %r{^/logs/\d\d\d\d/\d\d/\d\d/(chat|connections|dynmap)\.(txt|html)$} do |type, format|
+get %r{^/logs/\d\d\d\d/\d\d/\d\d/(chat|connections|dynmap)\.(txt|html)$} do |category, format|
   format = format.to_sym
-  type = type.to_sym
+  category = category.to_sym
 
-  path = File.join @log_dir, "#{type}.log"
+  path = File.join @log_dir, "#{category}.log"
 
   unless File.exists? path
     halt 404
@@ -57,29 +63,19 @@ get %r{^/logs/\d\d\d\d/\d\d/\d\d/(chat|connections|dynmap)\.(txt|html)$} do |typ
     file.read
   when :html
     content_type :html
-    case type
-    when :chat
-      @title = "Chat log / #{@date_str}"
-      @parser = Chat.new(file)
-    when :connections
-      @title = "Connections log / #{@date_str}"
-      @parser = Connections.new(file)
-    when :dynmap
-      @title = "Dynmap log / #{@date_str}"
-      @parser = Dynmap.new(file)
-    end
-    slim type
+    @title = "#{category.to_s.capitalize} log / #{@date_str}"
+    @parser = parser_class(category).new(file)
+    slim category
   else
     halt 400
   end
 end
 
 get %r{^/logs/\d\d\d\d/\d\d/\d\d/all.html$} do
-  @data = [:chat, :connections, :dynmap].flat_map do |type|
-    path = File.join @log_dir, "#{type}.log"
-    parser_class = Kernel.const_get type.to_s.split('_').collect(&:capitalize).join
+  @data = [:chat, :connections, :dynmap].flat_map do |category|
+    path = File.join @log_dir, "#{category}.log"
     if File.exists? path
-      parser_class.new(File.open(path)).to_a
+      parser_class(category).new(File.open(path)).to_a
     else
       []
     end
