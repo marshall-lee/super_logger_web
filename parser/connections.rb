@@ -9,16 +9,8 @@ class Connections
 
   class Entry < Struct.new(:time, :type, :player, :coord)
     include BaseEntry
-  end
 
-  include Enumerable
-
-  def initialize(file)
-    @file = file
-  end
-
-  def each
-    @file.each_line do |line|
+    def self.parse(line)
       data = RegExp.match line
 
       date_parts = data[1].split '/'
@@ -35,10 +27,22 @@ class Connections
       world_name = data[9].to_sym
       coord = Coord.new world_name, x, y, z
 
-      entry = Entry.new time, type, player, coord
+      entry = new time, type, player, coord
       player.entry = entry
 
-      yield entry
+      return entry
+    end
+  end
+
+  include Enumerable
+
+  def initialize(file)
+    @file = file
+  end
+
+  def each
+    @file.each_line do |line|
+      yield Entry.parse(line)
     end
   end
 end

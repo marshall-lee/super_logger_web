@@ -9,17 +9,8 @@ class Chat
 
   class Entry < Struct.new(:time, :player, :coord, :text)
     include BaseEntry
-  end
 
-  include Enumerable
-
-  def initialize(file)
-    @file = file
-  end
-
-
-  def each
-    @file.each_line do |line|
+    def self.parse(line)
       data = RegExp.match line
 
       date_parts = data[1].split '/'
@@ -36,10 +27,22 @@ class Chat
 
       text = data[9]
 
-      entry = Entry.new time, player, coord, text
+      entry = new time, player, coord, text
       player.entry = entry
 
-      yield entry
+      return entry
+    end
+  end
+
+  include Enumerable
+
+  def initialize(file)
+    @file = file
+  end
+
+  def each
+    @file.each_line do |line|
+      yield Entry.parse(line)
     end
   end
 

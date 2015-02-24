@@ -18,16 +18,8 @@ class Dynmap
     def coord
       Coord
     end
-  end
 
-  include Enumerable
-
-  def initialize(file)
-    @file = file
-  end
-
-  def each
-    @file.each_line do |line|
+    def self.parse(line)
       data = RegExp.match line
 
       date_parts = data[1].split '/'
@@ -41,10 +33,22 @@ class Dynmap
 
       text = data[5]
 
-      entry = Entry.new(time, source, player, text)
+      entry = new(time, source, player, text)
       player.entry = entry
 
-      yield entry
+      return entry
+    end
+  end
+
+  include Enumerable
+
+  def initialize(file)
+    @file = file
+  end
+
+  def each
+    @file.each_line do |line|
+      yield Entry.parse(line)
     end
   end
 end
