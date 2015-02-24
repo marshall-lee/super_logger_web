@@ -28,11 +28,11 @@ class IndexEntry < Struct.new(:date)
 
   def self.from_dir(dirname)
     root = Pathname.new dirname
-    root.children.flat_map do |year_path|
+    root.children.sort!.flat_map do |year_path|
       year = year_path.relative_path_from(root).to_s
-      year_path.children.flat_map do |month_path|
+      year_path.children.sort!.flat_map do |month_path|
         month = month_path.relative_path_from(year_path).to_s
-        month_path.children.flat_map do |day_path|
+        month_path.children.sort!.flat_map do |day_path|
           day = day_path.relative_path_from(month_path).to_s
           date = Date.parse "#{year}-#{month}-#{day}"
           new(date)
