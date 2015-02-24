@@ -4,11 +4,7 @@ require 'slim'
 require 'date'
 require 'pathname'
 
-require_relative 'parser/index_entry'
-require_relative 'parser/chat'
-require_relative 'parser/connections'
-require_relative 'parser/dynmap'
-require_relative 'parser/deaths'
+require_relative 'parser'
 
 set :server, :thin
 
@@ -46,7 +42,7 @@ before %r{^/logs/(\d\d\d\d)/(\d\d)/(\d\d)/} do |year, month, day|
                        @date.strftime("%d")
 end
 
-get %r{^/logs/\d\d\d\d/\d\d/\d\d/(chat|connections|dynmap|deaths)\.(txt|html)$} do |category, format|
+get %r{^/logs/\d\d\d\d/\d\d/\d\d/(#{Parser::Categories.join '|'})\.(txt|html)$} do |category, format|
   format = format.to_sym
   category = category.to_sym
 
@@ -73,7 +69,7 @@ get %r{^/logs/\d\d\d\d/\d\d/\d\d/(chat|connections|dynmap|deaths)\.(txt|html)$} 
 end
 
 get %r{^/logs/\d\d\d\d/\d\d/\d\d/all.html$} do
-  @data = [:chat, :connections, :dynmap, :deaths].flat_map do |category|
+  @data = Parser::Categories.flat_map do |category|
     path = File.join @log_dir, "#{category}.log"
     if File.exists? path
       parser_class(category).new(File.open(path)).to_a

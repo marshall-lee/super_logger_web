@@ -1,25 +1,19 @@
 require 'pathname'
 require 'date'
 
-class IndexEntry < Struct.new(:date)
+class IndexEntry < Struct.new(:date, *Parser::Categories)
   def base_uri
     date.strftime '/logs/%Y/%m/%d'
   end
 
-  def chat_href(format=:html)
-    "#{base_uri}/chat.#{format}"
-  end
+  Parser::Categories.each do |category|
+    class_eval <<-ruby, __FILE__, __LINE__
+      def #{category}_href(format=:html)
+        "\#{base_uri}/#{category}.\#{format}"
+      end
 
-  def connections_href(format=:html)
-    "#{base_uri}/connections.#{format}"
-  end
-
-  def dynmap_href(format=:html)
-    "#{base_uri}/dynmap.#{format}"
-  end
-
-  def deaths_href(format=:html)
-    "#{base_uri}/deaths.#{format}"
+      alias_method :#{category}?, :#{category}
+    ruby
   end
 
   def all_href
@@ -35,7 +29,10 @@ class IndexEntry < Struct.new(:date)
         month_path.children.sort!.flat_map do |day_path|
           day = day_path.relative_path_from(month_path).to_s
           date = Date.parse "#{year}-#{month}-#{day}"
-          new(date)
+          catergoy_values = Parser::Categories.map do |category|
+            File.exists? File.join(day_path, "#{category}.log")
+          end
+          new(date, *catergoy_values)
         end
       end
     end
