@@ -1,5 +1,6 @@
 require 'time'
 
+require_relative 'base_entry'
 require_relative 'player'
 require_relative 'coord'
 
@@ -7,9 +8,7 @@ class Connections
   RegExp = %r{\[(../../..) - (..:..:..)\] \[(JOIN|QUIT)\] (.+) \(([a-f0-9-]+)\) at \((-?\d+), (-?\d+), (-?\d+)\) in world '(\w+)'}
 
   class Entry < Struct.new(:time, :type, :player, :coord)
-    def time_s
-      time.strftime '%H:%M'
-    end
+    include BaseEntry
   end
 
   include Enumerable

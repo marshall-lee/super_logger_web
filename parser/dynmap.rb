@@ -1,6 +1,7 @@
 require 'time'
 require 'ostruct'
 
+require_relative 'base_entry'
 require_relative 'player'
 
 class Dynmap
@@ -12,9 +13,7 @@ class Dynmap
   end
 
   class Entry < Struct.new(:time, :source, :player, :text)
-    def time_s
-      time.strftime '%H:%M'
-    end
+    include BaseEntry
 
     def coord
       Coord
