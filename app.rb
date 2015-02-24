@@ -6,6 +6,9 @@ require 'pathname'
 
 require_relative 'parser'
 
+require_relative 'file_listener'
+require_relative 'global_faye_client'
+
 set :server, :thin
 
 configure do
@@ -22,6 +25,14 @@ end
 helpers do
   def parser_class(category)
     Kernel.const_get(category.to_s.split('_').collect(&:capitalize).join)
+  end
+
+  def listener
+    FileListener.instance
+  end
+
+  def faye
+    GlobalFayeClient.instance
   end
 end
 
@@ -48,6 +59,29 @@ before %r{^/logs/(\d\d\d\d)/(\d\d)/(\d\d)/} do |year, month, day|
                        @date.strftime("%d")
 end
 
+before %r{^/logs/\d\d\d\d/\d\d/\d\d/#{Parser::Categories.join '|'}|all\.html} do
+  faye_base = "/#{@date.strftime '%Y/%m/%d'}"
+  @faye_base = faye_base
+  Parser::Categories.each do |category|
+    path = File.join @log_dir, "#{category}.log"
+    next unless File.exists? path
+    tomorrow = (Time.now + 60*60*24).to_date.to_time
+    entry_class = parser_class(category)::Entry
+    unless listener.listens? path
+      listener.add(path, expires: tomorrow) do |position, line|
+        entry = entry_class.parse(line, position)
+        data = {
+          row: {
+            id: "#{category}-row-#{entry.line_no}",
+            html: partial("#{category}_tr", locals: { entry: entry })
+          }
+        }
+        faye.publish "#{faye_base}/#{category}", data
+      end
+    end
+  end
+end
+
 get %r{^/logs/\d\d\d\d/\d\d/\d\d/(#{Parser::Categories.join '|'})\.(txt|html)$} do |category, format|
   format = format.to_sym
   category = category.to_sym
@@ -68,6 +102,7 @@ get %r{^/logs/\d\d\d\d/\d\d/\d\d/(#{Parser::Categories.join '|'})\.(txt|html)$} 
     file.read
   when :html
     content_type :html
+    @faye_channel = "#{@faye_base}/#{category}"
     @title = "#{category.to_s.capitalize} log / #{@date_str}"
     @parser = parser_class(category).new(file)
     slim category
@@ -90,6 +125,7 @@ get %r{^/logs/\d\d\d\d/\d\d/\d\d/all.html$} do
   end
   @data.sort_by!(&:time)
 
+  @faye_channel = "#{@faye_base}/*"
   @title = "Log / #{@date_str}"
 
   slim :all
