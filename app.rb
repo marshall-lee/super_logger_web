@@ -1,5 +1,6 @@
 require 'sinatra'
 require 'sinatra/partial'
+require 'coffee_script'
 require 'slim'
 require 'date'
 require 'pathname'

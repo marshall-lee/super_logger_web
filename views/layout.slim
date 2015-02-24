@@ -6,6 +6,9 @@ html
     meta name="viewport" content="width=device-width, initial-scale=1.0"
     script type="text/javascript" src="http://code.jquery.com/jquery-1.11.2.min.js"
     script type="text/javascript" src="#{settings.faye_url}/client.js"
+    script type="text/javascript"
+      | var FAYE_URL = "#{settings.faye_url}";
+      == coffee :faye_client
 
   body
     == yield

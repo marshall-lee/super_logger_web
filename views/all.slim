@@ -8,3 +8,6 @@ table.log.all
       == partial :dynmap_tr, locals: { entry: entry }
     - elsif entry.is_a? Deaths::Entry
       == partial :deaths_tr, locals: { entry: entry }
+script type="text/javascript"
+  | var FAYE_LOG_CHANNEL = "#{@faye_channel}";
+  == coffee :listen_to_log
