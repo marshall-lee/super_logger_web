@@ -21,10 +21,10 @@ class FileListener
       if listens? path
         entry = entries[path]
         entry.timer.cancel
-        watcher = entry.watcher
+        entry.watcher.close
       end
 
-      watcher ||= EM.file_tail(path) do |w, line|
+      watcher = EM.file_tail(path) do |w, line|
         block.call w.position, line
       end
 
