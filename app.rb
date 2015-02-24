@@ -29,6 +29,10 @@ get '/logs' do
   slim :index
 end
 
+before %r{\.html$} do
+  expires 60*2, :public, :must_revalidate
+end
+
 before %r{^/logs/(\d\d\d\d)/(\d\d)/(\d\d)/} do |year, month, day|
   @date = begin
             Date.parse "#{year}-#{month}-#{day}"
@@ -52,6 +56,8 @@ get %r{^/logs/\d\d\d\d/\d\d/\d\d/(#{Parser::Categories.join '|'})\.(txt|html)$} 
     halt 404
   end
 
+  last_modified File.mtime(path)
+
   file = File.open(path, "r")
 
   case format
@@ -69,13 +75,16 @@ get %r{^/logs/\d\d\d\d/\d\d/\d\d/(#{Parser::Categories.join '|'})\.(txt|html)$} 
 end
 
 get %r{^/logs/\d\d\d\d/\d\d/\d\d/all.html$} do
-  @data = Parser::Categories.flat_map do |category|
-    path = File.join @log_dir, "#{category}.log"
-    if File.exists? path
-      parser_class(category).new(File.open(path)).to_a
-    else
-      []
-    end
+  paths = Parser::Categories.map { |category| File.join @log_dir, "#{category}.log" }
+  categories_with_paths = Parser::Categories.zip paths
+  categories_with_paths.select! do |_, path|
+    File.exists? path
+  end
+
+  last_modified categories_with_paths.map { |_, path| File.mtime(path) }.max
+
+  @data = categories_with_paths.flat_map do |category, path|
+    parser_class(category).new(File.open(path)).to_a
   end
   @data.sort_by!(&:time)
 
