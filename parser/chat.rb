@@ -7,10 +7,10 @@ require_relative 'coord'
 class Chat
   RegExp = %r{\[(../../..) - (..:..:..)\] (.+) \(([a-f0-9-]+)\) at \((-?\d+), (-?\d+), (-?\d+)\) in world '(\w+)' : (.+)$}
 
-  class Entry < Struct.new(:time, :player, :coord, :text)
+  class Entry < Struct.new(:time, :line_no, :player, :coord, :text)
     include BaseEntry
 
-    def self.parse(line)
+    def self.parse(line, line_no=nil)
       data = RegExp.match line
 
       date_parts = data[1].split '/'
@@ -27,7 +27,7 @@ class Chat
 
       text = data[9]
 
-      entry = new time, player, coord, text
+      entry = new time, line_no, player, coord, text
       player.entry = entry
 
       return entry
@@ -42,7 +42,7 @@ class Chat
 
   def each
     @file.each_line do |line|
-      yield Entry.parse(line)
+      yield Entry.parse(line, @file.pos)
     end
   end
 

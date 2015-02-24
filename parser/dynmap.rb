@@ -12,14 +12,14 @@ class Dynmap
     'dynmap'
   end
 
-  class Entry < Struct.new(:time, :source, :player, :text)
+  class Entry < Struct.new(:time, :line_no, :source, :player, :text)
     include BaseEntry
 
     def coord
       Coord
     end
 
-    def self.parse(line)
+    def self.parse(line, line_no=nil)
       data = RegExp.match line
 
       date_parts = data[1].split '/'
@@ -33,7 +33,7 @@ class Dynmap
 
       text = data[5]
 
-      entry = new(time, source, player, text)
+      entry = new time, line_no, source, player, text
       player.entry = entry
 
       return entry
@@ -48,7 +48,7 @@ class Dynmap
 
   def each
     @file.each_line do |line|
-      yield Entry.parse(line)
+      yield Entry.parse(line, @file.pos)
     end
   end
 end
