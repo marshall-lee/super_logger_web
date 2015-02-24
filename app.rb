@@ -66,7 +66,7 @@ before %r{^/logs/\d\d\d\d/\d\d/\d\d/#{Parser::Categories.join '|'}|all\.html} do
   Parser::Categories.each do |category|
     path = File.join @log_dir, "#{category}.log"
     next unless File.exists? path
-    tomorrow = (Time.now + 60*60*24).to_date.to_time
+    tomorrow = (@date.to_time + 60*60*24).to_date.to_time
     entry_class = parser_class(category)::Entry
     unless listener.listens? path
       listener.add(path, expires: tomorrow) do |position, line|
