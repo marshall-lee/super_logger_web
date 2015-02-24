@@ -1,5 +1,5 @@
 module Parser
-  Categories = [:chat, :connections, :dynmap, :deaths]
+  Categories = [:chat, :connections, :dynmap, :deaths].freeze
 end
 
 require_relative 'parser/index_entry'
