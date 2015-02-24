@@ -13,27 +13,31 @@ main.index
                   = e.date.strftime '%d'
                 a.descr href=e.all_href = "html"
                 span.partial
-                  span.chat
-                    ' chat:
-                    a href=e.chat_href(:html) html
-                    ' ◆
-                    a href=e.chat_href(:txt) txt
-                    ' ,
-                  span.connections
-                    ' connections:
-                    a href=e.connections_href(:html) html
-                    ' ◆
-                    a href=e.connections_href(:txt) txt
-                    ' ,
-                  span.dynmap
-                    ' dynmap:
-                    a href=e.dynmap_href(:html) html
-                    ' ◆
-                    a href=e.dynmap_href(:txt) txt
-                    ' .
-                  span.deaths
-                    ' deaths:
-                    a href=e.deaths_href(:html) html
-                    ' ◆
-                    a href=e.deaths_href(:txt) txt
-                    ' .
+                  - if e.chat?
+                    span.chat
+                      ' chat:
+                      a href=e.chat_href(:html) html
+                      ' ◆
+                      a href=e.chat_href(:txt) txt
+                      ' ,
+                  - if e.connections?
+                    span.connections
+                      ' connections:
+                      a href=e.connections_href(:html) html
+                      ' ◆
+                      a href=e.connections_href(:txt) txt
+                      ' ,
+                  - if e.dynmap?
+                    span.dynmap
+                      ' dynmap:
+                      a href=e.dynmap_href(:html) html
+                      ' ◆
+                      a href=e.dynmap_href(:txt) txt
+                      ' ,
+                  - if e.deaths?
+                    span.deaths
+                      ' deaths:
+                      a href=e.deaths_href(:html) html
+                      ' ◆
+                      a href=e.deaths_href(:txt) txt
+                      ' .
