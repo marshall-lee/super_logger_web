@@ -1,7 +1,3 @@
 table.log.deaths
   - @parser.each do |entry|
-    tr
-      td
-        == partial :base_entry, locals: { entry: entry }
-      td.entry.death
-        == partial :deaths_entry, locals: { entry: entry }
+    == partial :deaths_tr, locals: { entry: entry }

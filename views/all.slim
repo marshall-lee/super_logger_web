@@ -1,17 +1,10 @@
 table.log.all
   - @data.each do |entry|
-    tr
-      td
-        == partial :base_entry, locals: { entry: entry }
-        - if entry.is_a? Chat::Entry
-          td.entry.chat
-            == partial :chat_entry, locals: { entry: entry }
-        - elsif entry.is_a? Connections::Entry
-          td.entry.connection
-            == partial :connections_entry, locals: { entry: entry }
-        - elsif entry.is_a? Dynmap::Entry
-          td.entry.dynmap
-            == partial :dynmap_entry, locals: { entry: entry }
-        - elsif entry.is_a? Deaths::Entry
-          td.entry.death
-            == partial :deaths_entry, locals: { entry: entry }
+    - if entry.is_a? Chat::Entry
+      == partial :chat_tr, locals: { entry: entry }
+    - elsif entry.is_a? Connections::Entry
+      == partial :connections_tr, locals: { entry: entry }
+    - elsif entry.is_a? Dynmap::Entry
+      == partial :dynmap_tr, locals: { entry: entry }
+    - elsif entry.is_a? Deaths::Entry
+      == partial :deaths_tr, locals: { entry: entry }

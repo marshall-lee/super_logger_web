@@ -1,7 +1,3 @@
 table.log.chat
   - @parser.each do |entry|
-    tr
-      td
-        == partial :base_entry, locals: { entry: entry }
-      td.entry.chat
-        == partial :chat_entry, locals: { entry: entry }
+    == partial :chat_tr, locals: { entry: entry }

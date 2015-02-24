@@ -1,7 +1,3 @@
 table.log.connections
   - @parser.each do |entry|
-    tr
-      td
-        == partial :base_entry, locals: { entry: entry }
-      td.entry.connection
-        == partial :connections_entry, locals: { entry: entry }
+    == partial :connections_tr, locals: { entry: entry }
