@@ -1,7 +1,6 @@
 ---
 environment: production
-threaded: true
-threadpool_size: 2
+threaded: false
 tag: super_logger_web
 daemonize: true
 socket: /tmp/super_logger_web.sock

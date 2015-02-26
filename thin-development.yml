@@ -1,6 +1,5 @@
 ---
 environment: development
-threaded: true
-threadpool_size: 2
+threaded: false
 daemonize: false
 port: 4000
