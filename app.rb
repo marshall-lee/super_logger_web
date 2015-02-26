@@ -14,12 +14,12 @@ set :server, :thin
 
 configure do
   set :partial_template_engine, :slim
-  if development?
-    set :log_dir, File.join(File.dirname(__FILE__), 'sample_logs')
-    set :faye_url, 'http://localhost:4000/logs/faye'
-  else
+  if production?
     set :log_dir, "/home/minecraft/spigot/plugins/SuperLogger/logs"
     set :faye_url, 'http://mc.lemonspace.me/logs/faye'
+  else
+    set :log_dir, File.join(File.dirname(__FILE__), 'sample_logs')
+    set :faye_url, 'http://localhost:4000/logs/faye'
   end
 end
 
