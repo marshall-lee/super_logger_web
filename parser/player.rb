@@ -10,7 +10,7 @@ class Player < Struct.new(:entry, :nick, :uid)
   end
 
   def href
-    "http://mc.lemonspace.me/?playername=#{nick}&mapname=#{entry.coord.map_name}&zoom=6"
+    "http://dynmap.lemonspace.me/?playername=#{nick}&mapname=#{entry.coord.map_name}&zoom=6"
   end
 
   private

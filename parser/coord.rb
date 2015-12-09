@@ -1,6 +1,6 @@
 class Coord < Struct.new(:world_name, :x, :y, :z)
   def href
-    "http://mc.lemonspace.me/?worldname=#{world_name}&mapname=#{map_name}&x=#{x}&y=#{y}&z=#{z}&zoom=6"
+    "http://dynmap.lemonspace.me/?worldname=#{world_name}&mapname=#{map_name}&x=#{x}&y=#{y}&z=#{z}&zoom=6"
   end
 
   def map_name
